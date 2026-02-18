@@ -183,7 +183,7 @@
            <!-- 4. Sahaba View -->
         <div id="view-sahaba" class="view hidden">
             <button onclick="showView('home')" class="mb-4 text-emerald-700 font-bold">← العودة للرئيسية</button>
-            <h2 class="text-lg font-bold mb-4 text-sky-600">👤 أصحاب رسول الله ﷺ</h2>
+            <h2 class="text-lg font-bold mb-4 text-sky-600">👤 أصحاب رسول الله ﷺ </h2>
             <div class="space-y-6" id="sahaba-list"></div>
         </div>
 
@@ -256,31 +256,154 @@
 
     <script>
         
-          const sahabaVideos = [
-            { title: "أبو بكر الصديق رضي الله عنه", id: "0W0yR_U1iE0" },
-            { title: "عمر بن الخطاب رضي الله عنه", id: "H2P56V1kP0g" },
-            { title: "عثمان بن عفان رضي الله عنه", id: "mS7Y2rW6Jj0" },
-            { title: "علي بن أبي طالب رضي الله عنه", id: "G_kS4-Cq8zQ" },
-            { title: "خالد بن الوليد رضي الله عنه", id: "P_D2Y-z7vU8" }
-        ];
+        
 
         const weekChallenges = [
-            { title: "ختم سورة الكهف", points: 100, desc: "قراءة سورة الكهف كاملة في يوم الجمعة" },
-            { title: "صيام الإثنين والخميس", points: 200, desc: "سنة نبوية مؤكدة ترفع فيها الأعمال" },
-            { title: "الصلوات الخمس في المسجد", points: 150, desc: "المحافظة على صلاة الجماعة طوال اليوم" }
+              { title: "ختم سورة الكهف", points: 10, desc: "قراءة سورة الكهف كاملة في يوم الجمعة" },
+    { title: "صيام الإثنين والخميس", points: 10, desc: "سنة نبوية مؤكدة ترفع فيها الأعمال" },
+    { title: "الصلوات الخمس في المسجد", points: 10, desc: "المحافظة على صلاة الجماعة طوال اليوم" },
+    { title: "قيام الليل بركعتين", points: 10, desc: "ركعتان في جوف الليل بنية القرب من الله" },
+    { title: "قراءة جزء من القرآن", points: 10, desc: "ورد يومي ثابت من القرآن الكريم" },
+    { title: "الاستغفار 100 مرة", points: 10, desc: "استغفار يومي لتطهير القلب" },
+    { title: "الصلاة على النبي 100 مرة", points: 10, desc: "سبب لنيل شفاعة النبي ﷺ" },
+    { title: "صلة رحم", points: 10, desc: "زيارة أو اتصال بقريب" },
+    { title: "بر الوالدين", points: 10, desc: "قول أو فعل يدخل السرور عليهما" },
+    { title: "صدقة يومية", points: 10, desc: "إخراج صدقة ولو بسيطة" }
         ];
 
         const sunnahData = [
-            { title: "النوم على وضوء", points: 30, desc: "من بات طاهراً بات في شعاره ملك يستغفر له" },
-            { title: "السواك عند كل صلاة", points: 20, desc: "مطهرة للفم مرضاة للرب" }
+            { title: "النوم على وضوء", points: 10, desc: "من بات طاهراً بات في شعاره ملك يستغفر له" },
+    { title: "السواك عند كل صلاة", points: 10, desc: "مطهرة للفم مرضاة للرب" },
+    { title: "أذكار النوم", points: 10, desc: "الاقتداء بسنة النبي ﷺ قبل النوم" },
+    { title: "أذكار الاستيقاظ", points: 10, desc: "بدء اليوم بذكر الله" },
+    { title: "الدعاء بعد الوضوء", points: 10, desc: "فتح أبواب الجنة الثمانية" },
+    { title: "صلاة الضحى", points: 10, desc: "صدقة عن كل مفصل من الجسد" },
+    { title: "التيمن", points: 10, desc: "البدء باليمين في الأمور كلها" },
+    { title: "الابتسامة", points: 10, desc: "تبسمك في وجه أخيك صدقة" },
+    { title: "إفشاء السلام", points: 10, desc: "سبب للمحبة بين المسلمين" },
+    { title: "ذكر دخول وخروج المنزل", points: 10, desc: "حفظ وبركة في البيت" }
         ];
 
         const charityData = [
-            { title: "إماطة الأذى عن الطريق", points: 50, desc: "صدقة بسيطة ترفع بها درجاتك" },
-            { title: "الكلمة الطيبة", points: 30, desc: "تبسمك في وجه أخيك صدقة" },
-            { title: "سقاية الطيور أو الحيوانات", points: 100, desc: "في كل كبد رطبة أجر" },
-            { title: "إرسال ذكر لشخص", points: 20, desc: "الدال على الخير كفاعله" }
+             { title: "إماطة الأذى عن الطريق", points: 10, desc: "صدقة بسيطة ترفع بها درجاتك" },
+    { title: "الكلمة الطيبة", points: 10, desc: "تبسمك في وجه أخيك صدقة" },
+    { title: "سقاية الطيور أو الحيوانات", points: 10, desc: "في كل كبد رطبة أجر" },
+    { title: "إرسال ذكر لشخص", points: 10, desc: "الدال على الخير كفاعله" },
+    { title: "إطعام محتاج", points: 10, desc: "إدخال السرور على مسلم" },
+    { title: "التبرع للمسجد", points: 10, desc: "المساهمة في بيوت الله" },
+    { title: "مشاركة علم نافع", points: 10, desc: "نشر آية أو حديث أو فائدة" },
+    { title: "تفريج كربة", points: 10, desc: "مساعدة شخص في ضيق" },
+    { title: "قضاء حاجة مسلم", points: 10, desc: "الله في عون العبد ما كان العبد في عون أخيه" },
+    { title: "الدعاء للغير بظهر الغيب", points: 10, desc: "ولك بمثل ما دعوت" }
         ];
+    const sahabaData = [
+    {
+        title: "بلال بن رباح رضي الله عنه",
+        desc: "المؤذن الأول – الصبر والثبات على الحق",
+        videoUrl: "https://youtu.be/ySLr9IF1tk8?si=9pb-TAyxpSyYqUDI"
+    },
+    {
+        title: "أنس بن مالك رضي الله عنه",
+        desc: "خادم النبي ﷺ – التربية النبوية",
+        videoUrl: "https://youtu.be/5kE1cDeWpGM?si=eNJTNZNMM8oFMW6b"
+    },
+    {
+        title: "زيد بن حارثة رضي الله عنه",
+        desc: "الحب والولاء للنبي ﷺ",
+        videoUrl: "https://youtu.be/QxtIaaOi590?si=up8GV2hN_ydJEdQp"
+    },
+    {
+        title: "أسامة بن زيد رضي الله عنه",
+        desc: "القائد الشاب – الثقة النبوية",
+        videoUrl: "https://youtu.be/tBSXW4IqUNo?si=-5Rsphj_tTrCZI0F"
+    },
+    {
+        title: "عبد الله بن مسعود رضي الله عنه",
+        desc: "فقيه الأمة – القرآن والعلم",
+        videoUrl: "https://youtu.be/tLvXPDdr5nI?si=R3ZLpcWh9YiFjXzA"
+    },
+    {
+        title: "عبد الله بن عمرو بن حرام رضي الله عنه",
+        desc: "التضحية والجهاد",
+        videoUrl: "https://youtu.be/_PB38MUvciY?si=oWihKanJBE0R3ZUY"
+    },
+    {
+        title: "جابر بن عبد الله رضي الله عنه",
+        desc: "العلم والرواية عن النبي ﷺ",
+        videoUrl: "https://youtu.be/LKYmm4ZB17M?si=0QxLzyEBYCpOKi14"
+    },
+    {
+        title: "عمار بن ياسر رضي الله عنه",
+        desc: "الثبات على العقيدة",
+        videoUrl: "https://youtu.be/BZVPulJrJ78?si=fT6qyy3wtuu-cFUN"
+    },
+    {
+        title: "أبو هريرة رضي الله عنه",
+        desc: "حافظ السنة النبوية",
+        videoUrl: "https://youtu.be/Op4PVZnnqxU?si=QePiL5fNGaHXMS4N"
+    },
+    {
+        title: "طلحة بن عبيد الله رضي الله عنه",
+        desc: "الجود والشجاعة",
+        videoUrl: "https://youtu.be/5Y-mytv4Ze4?si=M_gsFhfqoVhK3M0r"
+    },
+    {
+        title: "الزبير بن العوام رضي الله عنه",
+        desc: "حواريّ رسول الله ﷺ",
+        videoUrl: "https://youtu.be/ffhsdPiGBDk?si=8EHEszlQmMPl0N8Q"
+    },
+    {
+        title: "عبد الله بن أم مكتوم رضي الله عنه",
+        desc: "الإيمان والعزيمة رغم الإعاقة",
+        videoUrl: "https://youtu.be/iLFCIWAJunk?si=IFp5mBY7if4vw8tl"
+    },
+    {
+        title: "عمرو بن الجموح رضي الله عنه",
+        desc: "الإصرار على الجهاد",
+        videoUrl: "https://youtu.be/x7wcsjpV9g8?si=1HFLaf9C1oxWWPC9"
+    },
+    {
+        title: "أبو عبيدة عامر بن الجراح رضي الله عنه",
+        desc: "أمين هذه الأمة",
+        videoUrl: "https://youtu.be/8RRTcpHGpHA?si=K8B3IoKoXfk6lUWv"
+    },
+    {
+        title: "معاذ بن جبل رضي الله عنه",
+        desc: "أعلم الأمة بالحلال والحرام",
+        videoUrl: "https://youtu.be/XJF5M3ECU5s?si=J5KMPoVjUXZzTFvX"
+    },
+    {
+        title: "سعد بن عبادة رضي الله عنه",
+        desc: "سيد الأنصار",
+        videoUrl: "https://youtu.be/dZh6h2fV_9c?si=0TK9pbrSEjgahUnD"
+    },
+    {
+        title: "حذيفة بن اليمان رضي الله عنه",
+        desc: "صاحب سر النبي ﷺ",
+        videoUrl: "https://youtu.be/cSlK_VY3PrM?si=VXqRFm6ToYkLiHnj"
+    },
+    {
+        title: "وحشي بن حرب رضي الله عنه",
+        desc: "قصة التوبة والتحول العظيم",
+        videoUrl: "https://youtu.be/5uflf6xl3Ms?si=spwVTISqeeXKuiC4"
+    },
+    {
+        title: "سلمان الفارسي رضي الله عنه",
+        desc: "رحلة البحث عن الحق",
+        videoUrl: "https://youtu.be/QryW5qlvAHg?si=Kp72ebn4clrR2TqQ"
+    },
+    {
+        title: "أبو طلحة الأنصاري رضي الله عنه",
+        desc: "الكرم والتضحية",
+        videoUrl: "https://youtu.be/7VQHkZEFjxA?si=pjcPhaCBNuq8-kv9"
+    },
+    {
+        title: "عبد الله بن عباس رضي الله عنه",
+        desc: "ترجمان القرآن",
+        videoUrl: "https://youtu.be/n4mvgMHEP20?si=-qh3qik7waDlwuGQ"
+    }
+];
+
         // Ayah of the Day Pool
         const ayahPool = [
             { text: "وَسَارِعُوا إِلَى مَغْفِرَةٍ مِنْ رَبِّكُمْ وَجَنَّةٍ عَرْضُهَا السَّمَاوَاتُ وَالْأَرْضُ أُعِدَّتْ لِلْمُتَّقِينَ", source: "سورة آل عمران (133)" },
@@ -980,7 +1103,28 @@
             d: "سورة يوسف - آية 86",
             count: 1
         }
-]
+],
+ ablutionAzkar: [{
+            id: 1,
+            t: "قبل الوضوء",
+            text: "بِسْمِ ٱللّٰهِ",
+            count: 1
+        },
+        {
+            id: 2,
+            t: "بعد الفراغ من الوضوء",
+            text: "أشْهَدُ أن لا إله إلا الله وحْدَهُ لا شريكَ لهُ ، وأشْهَدُ أنَّ محمداً عَبدُهُ ورسُولُه. اللَّهُمَّ اجْعَلْني مِنَ التَّوَّابينَ واجْعَلْنِي من المُتَطَهِّرِينَ.",
+            d: "فتحت له أبواب الجنة الثمانية يدخل من أيها شاء.",
+            count: 1
+        },
+        {
+            id: 3,
+            t: "كفارة الوضوء",
+            text: "سُبْحَانَكَ اللَّهُمَّ وبَحَمْدكَ أشْهدُ أنْ لا إلهَ إلا أنْتَ أَسْتَغْفِرُكَ وأتُوبُ إِلَيْكَ.",
+            d: "كتب في رق، ثم طبع بطابع، فلم يكسر إلى يوم القيامة.",
+            count: 1
+        }]
+
 };
 
         const seeraSteps = [
@@ -1156,6 +1300,91 @@
                     </div>`;
             });
         }
+        // 1. دالة عرض الصحابة
+function renderSahaba() {
+    const list = document.getElementById('sahaba-list');
+    list.innerHTML = '';
+
+    sahabaData.forEach((item) => {
+        list.innerHTML += `
+            <div onclick="openSahabiVideo('${item.videoUrl}')" 
+                 class="card p-4 border-l-4 border-indigo-500 cursor-pointer hover:scale-[1.01] transition">
+                 
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                    <h3 class="font-bold text-indigo-700 dark:text-indigo-400">
+                        ${item.title}
+                    </h3>
+                </div>
+
+                <p class="text-sm mt-2 italic text-gray-600 dark:text-gray-300">
+                    "${item.desc}"
+                </p>
+
+                <div class="mt-2 text-[11px] text-indigo-500">
+                    اضغط للمشاهدة ▶
+                </div>
+            </div>
+        `;
+    });
+}
+
+function openSahabiVideo(url) {
+    window.open(url, "_blank"); // تبويب جديد
+}
+
+
+// 2. دالة عرض تحديات الأسبوع
+function renderChallenges() {
+    const list = document.getElementById('challenges-list');
+    list.innerHTML = '';
+    weekChallenges.forEach((item) => {
+        list.innerHTML += `
+            <div class="card p-4 flex justify-between items-center group hover:bg-amber-50 dark:hover:bg-amber-900/10 transition-all">
+                <div>
+                    <h3 class="font-bold text-amber-700 dark:text-amber-400">${item.title}</h3>
+                    <p class="text-xs text-gray-500 mt-1">${item.desc}</p>
+                </div>
+                <div class="text-center">
+                    <span class="block text-lg font-bold text-amber-600">+${item.points}</span>
+                    <span class="text-[10px] opacity-70">نقطة</span>
+                </div>
+            </div>`;
+    });
+}
+
+// 3. دالة عرض السنن المهجورة
+function renderSunnah() {
+    const list = document.getElementById('sunnah-list');
+    list.innerHTML = '';
+    sunnahData.forEach((item) => {
+        list.innerHTML += `
+            <div class="card p-4 border-l-4 border-purple-500">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                    <h3 class="font-bold text-purple-700 dark:text-purple-400">${item.title}</h3>
+                </div>
+                <p class="text-sm mt-2 italic text-gray-600 dark:text-gray-300">"${item.desc}"</p>
+                <div class="mt-3 text-[11px] font-bold text-purple-600">الأجر: ${item.points} نقطة</div>
+            </div>`;
+    });
+}
+
+// 4. دالة عرض الصدقات البسيطة
+function renderCharity() {
+    const list = document.getElementById('charity-list');
+    list.innerHTML = '';
+    charityData.forEach((item) => {
+        list.innerHTML += `
+            <div class="card p-4 bg-gradient-to-l from-emerald-50 to-white dark:from-emerald-900/10 dark:to-slate-800">
+                <h3 class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
+                    💰 ${item.title}
+                </h3>
+                <p class="text-sm mt-1 opacity-80">${item.desc}</p>
+                <div class="mt-2 text-xs font-semibold text-emerald-600">+${item.points} نقطة إيمانية</div>
+            </div>`;
+    });
+}
 
         function renderSeera() {
             const list = document.getElementById('seera-content');
@@ -1173,12 +1402,13 @@
             renderAzkar('sabah');
             renderHadiths(); // تم تصحيح الاستدعاء هنا
             renderSeera();
+             renderSahaba();
+    renderChallenges();
+    renderSunnah();
+    renderCharity();
             fetchPrayerTimes();
             setInterval(() => { updateNextPrayer(); checkDateReset(); }, 60000);
         };
     </script>
 </body>
-
 </html>
-
-
