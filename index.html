@@ -19,6 +19,59 @@
         }
     </script>
     <style>
+
+        .bead {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #c99b6d, #8b5e3c); /* شكل الخشب */
+    box-shadow:
+        inset 4px 4px 6px rgba(255,255,255,0.3),
+        inset -4px -4px 6px rgba(0,0,0,0.3),
+        0 4px 8px rgba(0,0,0,0.25);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    margin: 4px;
+    position: relative;
+}
+
+.reset-bead {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #c99b6d, #8b5e3c);
+    box-shadow:
+        inset 2px 2px 4px rgba(255,255,255,0.3),
+        inset -2px -2px 4px rgba(0,0,0,0.3),
+        0 4px 6px rgba(0,0,0,0.25);
+    font-size: 18px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid #7b4f2e;
+    transition: transform 0.2s ease;
+}
+
+.reset-bead:hover {
+    transform: scale(1.1);
+}
+
+.count-display::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 30%;
+    margin: 2px auto 0;
+    background: rgba(139, 94, 60, 0.4); /* ظل خفيف متوافق مع اللون */
+    border-radius: 1px;
+}
         body { font-family: 'Cairo', sans-serif; transition: background-color 0.3s, color 0.3s; }
         .dark body { background-color: #1a202c; color: #e2e8f0; }
         .quran-font { font-family: 'Amiri', serif; }
@@ -121,8 +174,20 @@
                 <button onclick="showView('charity')" class="card p-3 flex flex-col items-center border-b-4 border-emerald-500">
                     <span class="text-2xl">💰</span><span class="text-[10px] mt-1 font-bold">صدقات بسيطة</span>
                 </button>
+                <button onclick="showView('aqeeda')" class="card p-3 flex flex-col items-center border-b-4 border-purple-500">
+    <span class="text-2xl">📖</span>
+    <span class="text-[10px] mt-1 font-bold">العقيدة</span>
+</button>
             </div>
         </div>
+
+        <!-- 8. Aqeeda View -->
+<div id="view-aqeeda" class="view hidden">
+    <button onclick="showView('home')" class="mb-4 text-emerald-700 font-bold">← العودة للرئيسية</button>
+    <h2 class="text-lg font-bold mb-4 text-purple-600">📖 العقيدة الإسلامية</h2>
+    <div class="space-y-6" id="aqeeda-list"></div>
+</div>
+
 
         <!-- Quran View -->
         <div id="view-quran" class="view hidden">
@@ -403,6 +468,37 @@
         videoUrl: "https://youtu.be/n4mvgMHEP20?si=-qh3qik7waDlwuGQ"
     }
 ];
+
+const aqeedaData = [
+    { title: "عقيدتنا في الصحابة _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/M_Hv4ULs-fA?si=J9mQqiDo8IPShIuL" },
+    { title: "هل الإنسان مخير أم مسير؟ _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/xzCIj5Bb-eo?si=zsiT72ebIVF5y8qO" },
+    { title: "الملائكة عالم يحبنا ونحبه _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/AatBs1hu14o?si=v21VtHQ1ZFAfK5Jx" },
+    { title: "الإيمان بالكتب _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/9QZx6VY70W4?si=Wv78qORvfdIQFktF" },
+    { title: "الإيمان بالرسل وخصائص نبينا صلى الله عليه وسلم _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/Pxe72o53Fgg?si=K11zZ8Po8WvsHorr" },
+    { title: "حقوق النبي على الأمة وحكم ادعاء النبوة بعده _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/FHyEdGIGWhg?si=zQAp-u8phWkrI0-s" },
+    { title: "حقيقة الإسراء والمعراج والمعجزات وكرامات الأولياء _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/wNy5bQ2Y26o?si=GJ1ylSs0pTD1zxEN" },
+    { title: "سبب لدراسة العقيدة (شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/VR1xbVL2Pnw?si=CEgA_Zj9v_L-ObAN" },
+    { title: "توحيد الربوبية - ثمرات إيمانية و مظاهر انحراف", desc: "", videoUrl: "https://youtu.be/TH_1ruHG15s?si=NgtpEaIjh2K9miGQ" },
+    { title: "مناقشة الملحدين - (شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/1UFm01zaYyg?si=M7XL2dU8VSBhSeXo" },
+    { title: "اعبد ربنا صح (توحيد الألوهية) - (كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/2e9g16KOT-I?si=R0-RhZimr4B97E3v" },
+    { title: "أنواع العبادات وكيف نتجنب الشرك فيها - توحيد الألوهية", desc: "", videoUrl: "https://youtu.be/2i370FWNVZM?si=uNGUWHux5d_TOSFM" },
+    { title: "مسائل هامة حول القبور والتوسل _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/_pRxEx3NyC4?si=t4JzTfVrkS5lZmx-" },
+    { title: "التوسل الممنوع _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/DeK1rOhYA54?si=ygGFP26OzsorHHy1" },
+    { title: "أنواع الشرك (شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/9BbflE2CWIQ?si=MKbqKH1Jb_lQiQ1x" },
+    { title: "السحر والتنجيم والكهانة _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/Pg509qUbfRU?si=B7NcdL1_jXy4NLUa" },
+    { title: "أهمية الإيمان الصحيح بالأسماء والصفات", desc: "", videoUrl: "https://youtu.be/yfLAMcpYSOc?si=7kBA7iQgBDpA1Cxl" },
+    { title: "كيف نصحح إيماننا بأسماء الله وصفاته", desc: "", videoUrl: "https://youtu.be/CoAU8fq3vss?si=-vkTbmMFZIMeFQYw" },
+    { title: "الرد على أهل البدع والتعبد إلى الله بالأسماء والصفات _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/lwKWWGk98PA?si=lNiD9Yz4vdEw98BP" },
+    { title: "أشراط الساعة الصغرى _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/GyMAeoscjFg?si=b-3KQkDgG2csPGuk" },
+    { title: "أشراط الساعة الكبرى _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/VWBvD2trYYk?si=btvQMOcGMuScTsox" },
+    { title: "نعيم القبر وعذابه ... حقيقة أم خيال؟ _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/ZOvvg3TwZDE?si=o0GLjuQXcPzcotbB" },
+    { title: "مشاهد يوم القيامة _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/2VYM7c9oemI?si=Ks6z7ZJtklRY3uwL" },
+    { title: "الفهم الصحيح لقضايا الإيمان والكفر (1) _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/TEAeN8N0tUs?si=SwQBnBqbk6yv5mYH" },
+    { title: "الفهم الصحيح لقضايا الإيمان والكفر (2) _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/mjq5rtPBINM?si=vqK3PrDlyO228aub" },
+    { title: "كيف نتعامل مع غير المسلمين (الولاء والبراء) _(شرح كتاب أصول الإيمان)", desc: "", videoUrl: "https://youtu.be/xr6SJWvf2PI?si=1UClGkWiDuAL4aAS" },
+    { title: "كل مكتوب = عُمق الإيمان بالقــدر || الشيخ سمير مصطفى", desc: "", videoUrl: "https://youtu.be/bkrn5JjMCxY?si=enjz5DQDyDxJy9bs" }
+];
+
 
         // Ayah of the Day Pool
         const ayahPool = [
@@ -1256,35 +1352,54 @@
             }
             if(!found) document.getElementById('prayer-timer').innerText = "القادمة: الفجر";
         }
+function renderAzkar(category){
+    window.currentAzkarCategory = category;
+    const list = document.getElementById('azkar-list');
+    list.innerHTML = '';
 
-        function renderAzkar(category) {
-            const list = document.getElementById('azkar-list');
-            list.innerHTML = '';
-            azkarData[category].forEach((item, index) => {
-                const id = `count-${category}-${index}`;
-                const val = azkarProgress[id] || 0;
-                const target = item.target || item.count;
-                const isDone = val >= target;
-                
-                const card = document.createElement('div');
-                card.className = `card p-4 flex flex-col items-center border-l-4 border-amber-400 select-none`;
-                card.innerHTML = `
-                    <p class="mb-3 text-lg quran-font font-bold text-center">${item.text}</p>
-                    <div id="${id}" class="w-16 h-16 rounded-full border-4 ${isDone?'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/40':'border-emerald-700'} flex items-center justify-center font-bold text-2xl cursor-pointer shadow-lg active:scale-90 transition-all">${val}</div>
-                    <p class="text-[10px] mt-2 opacity-50">المستهدف: ${target}</p>
-                `;
-                card.onclick = () => {
-                    let display = document.getElementById(id);
-                    let v = parseInt(display.innerText) + 1;
-                    display.innerText = v;
-                    azkarProgress[id] = v;
-                    localStorage.setItem('azkarProgress', JSON.stringify(azkarProgress));
-                    addPoints(1);
-                    if(v >= target) display.classList.replace('border-emerald-700', 'border-emerald-500');
-                };
-                list.appendChild(card);
-            });
-        }
+    azkarData[category].forEach((item, index) => {
+        const id = `count-${category}-${index}`;
+        const val = azkarProgress[id] || 0;
+        const target = item.target || item.count || 7; // المستهدف الطبيعي لكل ذكر
+
+        const card = document.createElement('div');
+        card.className = 'card p-4 border-l-4 border-amber-400 select-none relative';
+
+        card.innerHTML = `
+            <p class="mb-2 text-lg quran-font font-bold text-center">${item.text}</p>
+
+            <div style="display:flex; justify-content:center; position:relative;">
+                <div class="bead" id="${id}">${val}</div>
+                <button class="reset-bead" onclick="resetBead('${id}')" 
+                        style="position:absolute; top:-10px; right:-10px;">⟲</button>
+            </div>
+
+            <div class="count-display" style="color:#b58900">المستهدف: ${target}</div>
+        `;
+
+        const beadDiv = card.querySelector('.bead');
+        beadDiv.onclick = () => {
+            // كل ضغطة تزيد العدد بلا حدود
+            let v = (azkarProgress[id] || 0) + 1;
+            azkarProgress[id] = v;
+            localStorage.setItem('azkarProgress', JSON.stringify(azkarProgress));
+
+            beadDiv.innerText = v;
+        };
+
+        list.appendChild(card);
+    });
+}
+
+function resetBead(id){
+    azkarProgress[id] = 0;
+    localStorage.setItem('azkarProgress', JSON.stringify(azkarProgress));
+    const beadDiv = document.getElementById(id);
+    if(beadDiv){
+        beadDiv.innerText = 0;
+    }
+}
+
 
         // تم تصحيح اسم الدالة ومنطق التعامل مع الكائنات
         function renderHadiths() {
@@ -1300,6 +1415,42 @@
                     </div>`;
             });
         }
+
+        function renderAqeeda() {
+    const list = document.getElementById('aqeeda-list');
+    list.innerHTML = '';
+
+    aqeedaData.forEach((item) => {
+        list.innerHTML += `
+            <div onclick="openAqeedaVideo('${item.videoUrl}')" 
+                 class="card p-4 border-l-4 border-purple-500 cursor-pointer hover:scale-[1.01] transition">
+                 
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                    <h3 class="font-bold text-purple-700 dark:text-purple-400">
+                        ${item.title}
+                    </h3>
+                </div>
+
+                <p class="text-sm mt-2 italic text-gray-600 dark:text-gray-300">
+                    "${item.desc}"
+                </p>
+
+                <div class="mt-2 text-[11px] text-purple-500">
+                    اضغط للمشاهدة ▶
+                </div>
+            </div>
+        `;
+    });
+}
+
+// دالة فتح الفيديو
+function openAqeedaVideo(url) {
+    window.open(url, '_blank');
+}
+// عند فتح العرض
+document.querySelector('[onclick="showView(\'aqeeda\')"]').addEventListener('click', renderAqeeda);
+
         // 1. دالة عرض الصحابة
 function renderSahaba() {
     const list = document.getElementById('sahaba-list');
@@ -1412,3 +1563,4 @@ function renderCharity() {
     </script>
 </body>
 </html>
+
